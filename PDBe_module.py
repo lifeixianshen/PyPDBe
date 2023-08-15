@@ -16,9 +16,9 @@ class PyPDBe:
         :param resultpath: path to the file where results are stored (if the file exists, will be overwritten)
         :return:
         """
-        url = 'http://www.ebi.ac.uk/pdbe/api/pdb/entry/' + action + '/' + pdbid
+        url = f'http://www.ebi.ac.uk/pdbe/api/pdb/entry/{action}/{pdbid}'
         if chain_id:
-            url += "chain/" + chain_id
+            url += f"chain/{chain_id}"
         print(url)
         try:
             request = urllib.request.Request(url)
@@ -34,7 +34,7 @@ class PyPDBe:
             return result
         except urllib.error.HTTPError as err:
             if err.code == 404:
-                print('Structure %s not found' % pdbid)
+                print(f'Structure {pdbid} not found')
             else:
                 print('Invalid Input')
 
